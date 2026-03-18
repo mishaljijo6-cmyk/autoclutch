@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoClutch Pro — Drive Smarter. Shift Effortlessly.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700&family=Barlow+Condensed:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--red:#E8272A;--red-dark:#B01E21;--black:#0A0A0A;--dark:#121212;--dark2:#1A1A1A;--dark3:#242424;--grey:#2E2E2E;--mid:#666;--muted:#888;--light:#CCCCCC;--white:#F5F5F5;--gold:#D4AF37;--green:#22C55E;}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Barlow',sans-serif;overflow-x:hidden;}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-thumb{background:var(--red);}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;background:rgba(10,10,10,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(232,39,42,.15);}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-box{width:36px;height:36px;background:var(--red);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;}
+.logo-text{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:2px;color:var(--white);}
+.logo-text em{color:var(--red);font-style:normal;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--white);}
+.nav-r{display:flex;gap:10px;align-items:center;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:4px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;border:none;transition:all .2s;text-decoration:none;}
+.btn-o{background:transparent;border:1.5px solid var(--red);color:var(--red);}
+.btn-o:hover{background:var(--red);color:#fff;}
+.btn-r{background:var(--red);color:#fff;}
+.btn-r:hover{background:var(--red-dark);box-shadow:0 6px 24px rgba(232,39,42,.4);transform:translateY(-1px);}
+.btn-g{background:var(--gold);color:#0A0A0A;font-weight:700;}
+.btn-g:hover{background:#c9a227;transform:translateY(-1px);}
+.btn-lg{padding:16px 36px;font-size:16px;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+.hamburger span{width:22px;height:2px;background:var(--white);display:block;}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 48px 80px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 65% 40%,rgba(232,39,42,.1) 0%,transparent 55%),radial-gradient(ellipse at 20% 80%,rgba(212,175,55,.05) 0%,transparent 45%),#0A0A0A;}
+.hero-grid{position:absolute;inset:0;opacity:.03;background-image:linear-gradient(rgba(255,255,255,.6)1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.6)1px,transparent 1px);background-size:56px 56px;}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(232,39,42,.1);border:1px solid rgba(232,39,42,.3);color:var(--red);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border-radius:100px;width:fit-content;margin-bottom:24px;}
+.badge::before{content:'';width:6px;height:6px;background:var(--red);border-radius:50%;animation:blink 1.5s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+h1.hl{font-family:'Bebas Neue',sans-serif;font-size:clamp(70px,10vw,140px);line-height:.93;letter-spacing:2px;margin-bottom:10px;}
+h1.hl em{color:var(--red);font-style:normal;}
+.hero-sub{font-family:'Barlow Condensed',sans-serif;font-size:clamp(16px,2vw,22px);font-weight:300;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:28px;}
+.hero-desc{font-size:17px;line-height:1.7;color:var(--light);max-width:520px;margin-bottom:40px;font-weight:300;}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:56px;}
+.stats{display:flex;gap:44px;flex-wrap:wrap;padding-top:40px;border-top:1px solid rgba(255,255,255,.07);}
+.stat-n{font-family:'Bebas Neue',sans-serif;font-size:44px;line-height:1;}
+.stat-n em{color:var(--red);font-style:normal;}
+.stat-l{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);margin-top:3px;}
+.hero-vis{position:absolute;right:0;top:50%;transform:translateY(-50%);width:46%;pointer-events:none;opacity:.85;}
+
+/* ORDER */
+#order{background:var(--black);padding:0;}
+.order-banner{background:linear-gradient(135deg,#0d0d0d 0%,#180505 50%,#0d0d0d 100%);border-bottom:1px solid rgba(232,39,42,.2);border-top:3px solid var(--red);padding:64px 48px;position:relative;overflow:hidden;}
+.order-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 55% 50%,rgba(232,39,42,.08) 0%,transparent 65%);}
+.order-banner-inner{position:relative;max-width:1300px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:32px;}
+.order-banner h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,6vw,92px);line-height:.93;letter-spacing:2px;margin-bottom:14px;}
+.order-banner h2 em{color:var(--red);font-style:normal;}
+.order-banner p{font-size:16px;color:var(--light);font-weight:300;max-width:480px;line-height:1.6;}
+.trust-pills{display:flex;flex-direction:column;gap:10px;min-width:230px;}
+.tp{display:flex;align-items:center;gap:12px;padding:13px 18px;border-radius:8px;font-size:13px;color:var(--light);}
+.tp-g{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);}
+.tp-y{background:rgba(212,175,55,.07);border:1px solid rgba(212,175,55,.2);}
+.tp-r{background:rgba(232,39,42,.07);border:1px solid rgba(232,39,42,.2);}
+.tp span:first-child{font-size:18px;}
+
+/* Kit Step */
+.kit-zone{background:var(--dark);padding:56px 48px;border-bottom:1px solid rgba(255,255,255,.04);}
+.kit-zone-in{max-width:1300px;margin:0 auto;}
+.step-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.step-tag::before{content:'STEP 1';background:var(--red);color:#fff;padding:2px 9px;border-radius:3px;font-size:10px;letter-spacing:1px;}
+.kit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px;}
+.kc{background:var(--dark3);border:2px solid var(--grey);border-radius:12px;padding:28px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;}
+.kc:hover{border-color:rgba(232,39,42,.5);background:var(--dark2);}
+.kc.sel{border-color:var(--red);background:rgba(232,39,42,.06);}
+.kc .chk{position:absolute;top:14px;right:14px;width:24px;height:24px;border-radius:50%;border:2px solid var(--grey);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:transparent;transition:all .2s;}
+.kc.sel .chk{background:var(--red);border-color:var(--red);color:#fff;}
+.kc-pop{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 14px;border-radius:0 0 7px 7px;white-space:nowrap;}
+.kc-tier{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.kc-tier.mt{margin-top:14px;}
+.kc-price{font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:1;margin-bottom:3px;}
+.kc-price em{font-size:22px;color:var(--muted);font-style:normal;}
+.kc-note{font-size:11px;color:var(--mid);margin-bottom:18px;}
+.kc-name{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;}
+.kc-feats{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.kc-feats li{display:flex;gap:7px;align-items:flex-start;font-size:13px;color:var(--light);}
+.kc-feats li span{font-size:10px;font-weight:700;margin-top:2px;flex-shrink:0;}
+.cg{color:var(--green);}
+.cr{color:var(--red);}
+.cd{color:var(--gold);}
+.addons-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
+.addon{display:flex;align-items:center;gap:9px;background:var(--dark3);border:1.5px solid var(--grey);border-radius:7px;padding:11px 16px;cursor:pointer;font-size:13px;color:var(--light);transition:all .2s;}
+.addon:hover{border-color:rgba(232,39,42,.4);}
+.addon:has(input:checked){border-color:var(--red);background:rgba(232,39,42,.06);}
+.addon input{accent-color:var(--red);width:15px;height:15px;cursor:pointer;}
+
+/* Form area */
+.form-area{background:var(--black);padding:60px 48px;}
+.form-area-in{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1fr 400px;gap:48px;align-items:start;}
+.form-col{display:flex;flex-direction:column;gap:22px;}
+.fc{background:var(--dark2);border:1px solid var(--grey);border-radius:12px;padding:36px;}
+.fc-hdr{display:flex;align-items:center;gap:12px;margin-bottom:26px;}
+.fc-num{width:30px;height:30px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:15px;flex-shrink:0;}
+.fc-ttl{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:1px;}
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+.fg:last-child{margin-bottom:0;}
+label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
+input,select,textarea{background:var(--dark);border:1.5px solid var(--grey);border-radius:6px;padding:11px 14px;color:var(--white);font-family:'Barlow',sans-serif;font-size:15px;outline:none;transition:border-color .2s;width:100%;}
+input:focus,select:focus,textarea:focus{border-color:var(--red);}
+select option{background:var(--dark);}
+textarea{resize:vertical;min-height:72px;}
+.hint{font-size:11px;color:var(--mid);margin-top:5px;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.pay-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px;}
+.po{background:var(--dark);border:1.5px solid var(--grey);border-radius:7px;padding:13px 12px;cursor:pointer;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--light);transition:all .2s;}
+.po:hover{border-color:rgba(232,39,42,.4);}
+.po.sel{border-color:var(--red);background:rgba(232,39,42,.08);color:var(--white);}
+.pf{display:none;margin-bottom:18px;}
+.pf.show{display:block;}
+.terms-r{display:flex;align-items:flex-start;gap:9px;margin-bottom:18px;}
+.terms-r input{width:15px;height:15px;flex-shrink:0;margin-top:3px;accent-color:var(--red);}
+.terms-r label{font-size:12px;color:var(--muted);letter-spacing:0;text-transform:none;font-weight:400;cursor:pointer;line-height:1.5;}
+.terms-r a{color:var(--red);text-decoration:none;}
+.place-btn{width:100%;font-size:17px;padding:19px;border-radius:8px;letter-spacing:2px;justify-content:center;}
+.secure-note{text-align:center;font-size:11px;color:var(--mid);margin-top:10px;}
+.sep{height:1px;background:rgba(255,255,255,.06);margin:22px 0;}
+
+/* Success */
+.success-blk{display:none;background:var(--dark2);border:1px solid rgba(34,197,94,.3);border-radius:12px;padding:56px 40px;text-align:center;}
+.success-blk .tick{font-size:60px;margin-bottom:16px;}
+.success-blk h3{font-family:'Bebas Neue',sans-serif;font-size:36px;margin-bottom:10px;color:var(--green);}
+.success-blk p{color:var(--muted);font-size:15px;line-height:1.7;}
+
+/* Summary sidebar */
+.sum-side{position:sticky;top:84px;}
+.sum-box{background:var(--dark2);border:1px solid rgba(232,39,42,.25);border-radius:12px;overflow:hidden;margin-bottom:14px;}
+.sum-hdr{background:linear-gradient(135deg,rgba(232,39,42,.15),rgba(232,39,42,.04));padding:22px 24px;border-bottom:1px solid rgba(232,39,42,.15);}
+.sum-lbl{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:5px;}
+.sum-kit{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;}
+.sum-bd{padding:22px 24px;}
+.sum-row{display:flex;justify-content:space-between;font-size:14px;color:var(--light);margin-bottom:10px;}
+.sum-row.sm{color:var(--muted);font-size:13px;}
+.sum-div{height:1px;background:rgba(255,255,255,.08);margin:14px 0;}
+.sum-tot{display:flex;justify-content:space-between;align-items:center;}
+.sum-tot-l{font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+.sum-tot-p{font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--red);}
+.emi-box{background:rgba(212,175,55,.07);border:1px solid rgba(212,175,55,.2);border-radius:6px;padding:11px 14px;font-size:12px;color:var(--gold);margin-top:12px;}
+.box-box{background:var(--dark2);border:1px solid var(--grey);border-radius:12px;padding:22px 24px;margin-bottom:14px;}
+.box-ttl{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;}
+.box-item{display:flex;gap:9px;align-items:center;font-size:13px;color:var(--light);margin-bottom:9px;}
+.b4g{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:14px;}
+.b4{background:var(--dark2);border:1px solid var(--grey);border-radius:7px;padding:13px;text-align:center;}
+.b4 .bi{font-size:18px;margin-bottom:3px;}
+.b4 .bl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.8px;text-transform:uppercase;line-height:1.4;}
+.help{text-align:center;font-size:13px;color:var(--mid);}
+.help a{color:var(--red);text-decoration:none;font-weight:600;}
+
+/* FEATURES */
+#features{padding:90px 48px;background:var(--dark);}
+.sl{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:14px;}
+.st{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5vw,64px);line-height:1;margin-bottom:16px;}
+.sd{font-size:17px;line-height:1.7;color:var(--light);max-width:580px;font-weight:300;margin-bottom:52px;}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.feat{background:var(--dark2);padding:36px 30px;border-left:3px solid transparent;transition:all .3s;}
+.feat:hover{border-left-color:var(--red);background:var(--dark3);}
+.feat-i{font-size:30px;margin-bottom:18px;}
+.feat-t{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:9px;}
+.feat-d{font-size:14px;line-height:1.65;color:var(--muted);}
+.feat-d strong{color:var(--red);}
+
+/* COMPARE */
+#compare{padding:90px 48px;background:var(--black);}
+.ctab{width:100%;border-collapse:collapse;}
+.ctab th,.ctab td{padding:16px 22px;text-align:left;border-bottom:1px solid rgba(255,255,255,.05);font-size:14px;}
+.ctab th{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);background:var(--dark2);}
+.ctab tr:hover td{background:rgba(255,255,255,.015);}
+.ctab tr.ours td{background:rgba(232,39,42,.04);}
+.ctab tr.ours td:first-child{color:var(--red);font-weight:700;}
+.bg{display:inline-block;padding:2px 10px;border-radius:100px;font-size:11px;font-weight:700;}
+.bgg{background:rgba(34,197,94,.12);color:var(--green);}
+.bgb{background:rgba(239,68,68,.1);color:#EF4444;}
+.bgy{background:rgba(234,179,8,.1);color:#EAB308;}
+
+/* FAQ */
+#faq{padding:90px 48px;background:var(--dark);}
+.faq-wrap{max-width:780px;}
+.fi{background:var(--dark2);margin-bottom:2px;}
+.fq{padding:22px 26px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;transition:color .2s;}
+.fq:hover{color:var(--red);}
+.fq .ic{font-size:18px;color:var(--red);transition:transform .3s;}
+.fa{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.fa-in{padding:0 26px 22px;font-size:15px;line-height:1.7;color:var(--light);font-weight:300;}
+.fi.open .fa{max-height:260px;}
+.fi.open .ic{transform:rotate(45deg);}
+
+/* FOOTER */
+footer{background:#050505;border-top:1px solid rgba(255,255,255,.05);padding:60px 48px 36px;}
+.fg2{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;margin-bottom:52px;}
+.fb p{font-size:13px;line-height:1.7;color:var(--mid);max-width:280px;margin-top:14px;}
+.fc2 h4{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--white);margin-bottom:18px;}
+.fc2 ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.fc2 a{text-decoration:none;color:var(--mid);font-size:13px;transition:color .2s;}
+.fc2 a:hover{color:var(--red);}
+.fb2{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid rgba(255,255,255,.05);font-size:11px;color:var(--mid);}
+
+/* MODAL */
+.mov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+.mov.on{display:flex;}
+.modal{background:var(--dark2);border:1px solid var(--grey);border-radius:12px;padding:36px;max-width:520px;width:90%;position:relative;max-height:88vh;overflow-y:auto;}
+.mx{position:absolute;top:14px;right:14px;background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;}
+.mx:hover{color:var(--white);}
+.mt2{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:1px;margin-bottom:6px;}
+.ms{font-size:13px;color:var(--muted);margin-bottom:24px;}
+
+/* TOAST */
+.toast{position:fixed;bottom:28px;right:28px;background:var(--dark2);border:1px solid var(--green);border-radius:8px;padding:14px 20px;display:flex;align-items:center;gap:10px;font-size:14px;z-index:3000;transform:translateY(80px);opacity:0;transition:all .4s;max-width:360px;}
+.toast.on{transform:translateY(0);opacity:1;}
+
+/* FLOATING CTA */
+.fcta{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);z-index:999;display:none;}
+.fcta.on{display:flex;}
+.fcta-in{display:flex;gap:10px;align-items:center;background:var(--dark2);border:1px solid rgba(232,39,42,.4);border-radius:100px;padding:8px 8px 8px 22px;box-shadow:0 16px 48px rgba(0,0,0,.6);}
+.fct{font-size:14px;font-weight:500;white-space:nowrap;}
+
+/* ANIM */
+.ani{opacity:0;transform:translateY(24px);transition:all .55s ease;}
+.ani.vis{opacity:1;transform:translateY(0);}
+
+@media(max-width:1024px){
+  nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  #hero,.order-banner,.kit-zone,.form-area,#features,#compare,#faq,footer{padding-left:20px;padding-right:20px;}
+  .kit-grid,.feat-grid{grid-template-columns:1fr;}
+  .form-area-in{grid-template-columns:1fr;}
+  .form-area{padding:40px 20px;}
+  .kit-zone{padding:40px 20px;}
+  .hero-vis{display:none;}
+  .stats{gap:24px;}
+  .fg2{grid-template-columns:1fr 1fr;gap:28px;}
+  .g2{grid-template-columns:1fr;}
+  .pay-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:640px){
+  .hero-actions{flex-direction:column;}
+  .btn-lg{width:100%;justify-content:center;}
+  .trust-pills{min-width:unset;}
+  .order-banner-inner{flex-direction:column;}
+  .fg2{grid-template-columns:1fr;}
+  .fb2{flex-direction:column;gap:8px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="logo">
+    <div class="logo-box">AC</div>
+    <span class="logo-text">Auto<em>Clutch</em> Pro</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#order">Order</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#compare">Compare</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <div class="nav-r">
+    <a href="#order" class="btn btn-r">🛒 Order Now</a>
+    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div style="position:relative">
+    <div class="badge">🚗 First Aftermarket iMT Kit in India</div>
+    <h1 class="hl">DRIVE<br>WITHOUT<br><em>PAIN.</em></h1>
+    <p class="hero-sub">Drive Smarter. Shift Effortlessly.</p>
+    <p class="hero-desc">AutoClutch Pro converts any manual transmission car into an intelligent clutchless iMT — without cutting wires, voiding your warranty, or replacing your gearbox.</p>
+    <div class="hero-actions">
+      <a href="#order" class="btn btn-r btn-lg">🛒 Order Now — From ₹25,000</a>
+      <a href="#features" class="btn btn-o btn-lg">Explore Features</a>
+    </div>
+    <div class="stats">
+      <div><div class="stat-n">300<em>+</em></div><div class="stat-l">Clutch presses/hr avoided</div></div>
+      <div><div class="stat-n">₹25<em>K</em></div><div class="stat-l">Starting price</div></div>
+      <div><div class="stat-n">5<em>%</em></div><div class="stat-l">Fuel efficiency gain</div></div>
+      <div><div class="stat-n">0</div><div class="stat-l">Wires cut</div></div>
+    </div>
+  </div>
+  <div class="hero-vis">
+    <svg viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%">
+      <rect x="80" y="180" width="440" height="140" rx="20" fill="#1A1A1A" stroke="#2E2E2E" stroke-width="1.5"/>
+      <path d="M160 180 Q180 100 240 90 L360 90 Q420 100 440 180Z" fill="#151515" stroke="#2E2E2E" stroke-width="1.5"/>
+      <path d="M175 178 Q185 120 235 108 L295 108 L295 178Z" fill="#0D1117" stroke="#E8272A" stroke-width="1" opacity=".8"/>
+      <path d="M305 178 L305 108 L360 108 Q410 120 420 178Z" fill="#0D1117" stroke="#E8272A" stroke-width="1" opacity=".8"/>
+      <circle cx="185" cy="310" r="55" fill="#0A0A0A" stroke="#2E2E2E" stroke-width="2"/>
+      <circle cx="185" cy="310" r="35" fill="#151515" stroke="#E8272A" stroke-width="1.5"/>
+      <circle cx="185" cy="310" r="12" fill="#E8272A"/>
+      <circle cx="415" cy="310" r="55" fill="#0A0A0A" stroke="#2E2E2E" stroke-width="2"/>
+      <circle cx="415" cy="310" r="35" fill="#151515" stroke="#E8272A" stroke-width="1.5"/>
+      <circle cx="415" cy="310" r="12" fill="#E8272A"/>
+      <ellipse cx="510" cy="230" rx="18" ry="12" fill="#E8272A" opacity=".9"/>
+      <ellipse cx="510" cy="230" rx="8" ry="5" fill="#FF8080"/>
+      <ellipse cx="90" cy="230" rx="18" ry="12" fill="#E8272A" opacity=".6"/>
+      <line x1="300" y1="185" x2="300" y2="310" stroke="#2E2E2E" stroke-width="1"/>
+      <rect x="248" y="200" width="84" height="48" rx="6" fill="rgba(232,39,42,0.1)" stroke="#E8272A" stroke-width="1" stroke-dasharray="4 2"/>
+      <text x="268" y="228" fill="#E8272A" font-size="10" font-family="monospace">OBD-II</text>
+      <rect x="138" y="240" width="62" height="34" rx="4" fill="rgba(212,175,55,0.1)" stroke="#D4AF37" stroke-width="1"/>
+      <text x="144" y="261" fill="#D4AF37" font-size="9" font-family="monospace">ACTUATOR</text>
+      <path d="M378 128 Q388 123 378 118" stroke="#E8272A" stroke-width="1.5" fill="none" opacity=".7"/>
+      <path d="M383 131 Q398 123 383 115" stroke="#E8272A" stroke-width="1.5" fill="none" opacity=".45"/>
+      <circle cx="368" cy="123" r="13" fill="rgba(232,39,42,0.12)" stroke="#E8272A" stroke-width="1"/>
+      <text x="361" y="128" fill="#E8272A" font-size="11" font-family="monospace">⚙</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══ ORDER ═══ -->
+<section id="order">
+
+  <!-- Banner -->
+  <div class="order-banner">
+    <div class="order-banner-inner">
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:10px;">🛒 Secure Checkout · Early Adopter Pricing</div>
+        <h2>ORDER YOUR<br><em>AUTOCLUTCH PRO</em></h2>
+        <p>Limited units available at launch pricing. Join India's first clutchless manual revolution and drive pain-free from day one.</p>
+      </div>
+      <div class="trust-pills">
+        <div class="tp tp-g"><span>🔒</span><span>256-bit SSL Secure Checkout</span></div>
+        <div class="tp tp-y"><span>🔄</span><span>30-Day No-Questions Return Policy</span></div>
+        <div class="tp tp-r"><span>📦</span><span>Free Pan-India Delivery · 5–7 Days</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 1: Kit -->
+  <div class="kit-zone">
+    <div class="kit-zone-in">
+      <div class="step-tag">Choose Your Kit</div>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:1px;">SELECT YOUR PLAN</h3>
+
+      <div class="kit-grid" id="kitGrid">
+        <!-- Standard -->
+        <div class="kc sel ani" data-price="25000" data-name="B2C Retail Kit" onclick="selKit(this)">
+          <div class="chk">✓</div>
+          <div class="kc-tier">Standard</div>
+          <div class="kc-price"><em>₹</em>25,000</div>
+          <div class="kc-note">+ GST · Direct to driver</div>
+          <div class="kc-name">B2C Retail Kit</div>
+          <ul class="kc-feats">
+            <li><span class="cg">✓</span> Full actuator + clamp assembly</li>
+            <li><span class="cg">✓</span> Smart wireless gear knob</li>
+            <li><span class="cg">✓</span> OBD-II controller unit</li>
+            <li><span class="cg">✓</span> Install guide + video tutorial</li>
+            <li><span class="cg">✓</span> OBD-II companion app (1 device)</li>
+            <li><span class="cg">✓</span> 1-year hardware warranty</li>
+          </ul>
+        </div>
+
+        <!-- Premium -->
+        <div class="kc ani" data-price="35999" data-name="Premium Kit" onclick="selKit(this)" style="position:relative;">
+          <div class="chk">✓</div>
+          <div class="kc-pop">⭐ MOST POPULAR</div>
+          <div class="kc-tier mt">Premium</div>
+          <div class="kc-price"><em>₹</em>35,999</div>
+          <div class="kc-note">+ GST · With professional installation</div>
+          <div class="kc-name">Premium Kit</div>
+          <ul class="kc-feats">
+            <li><span class="cg">✓</span> Everything in Standard Kit</li>
+            <li><span class="cr">★</span> <strong>Professional install included</strong></li>
+            <li><span class="cr">★</span> <strong>2-year extended warranty</strong></li>
+            <li><span class="cr">★</span> Priority customer support</li>
+            <li><span class="cr">★</span> Free first calibration service</li>
+            <li><span class="cr">★</span> App for 3 devices</li>
+          </ul>
+        </div>
+
+        <!-- Fleet -->
+        <div class="kc ani" data-price="20500" data-name="Fleet Kit" onclick="selKit(this)">
+          <div class="chk">✓</div>
+          <div class="kc-tier">Business</div>
+          <div class="kc-price"><em>₹</em>20,500</div>
+          <div class="kc-note">per unit · Minimum 50 units · B2B</div>
+          <div class="kc-name">Fleet Kit</div>
+          <ul class="kc-feats">
+            <li><span class="cd">✓</span> 30% bulk discount applied</li>
+            <li><span class="cd">✓</span> Fleet SaaS monitoring dashboard</li>
+            <li><span class="cd">✓</span> Dedicated account manager</li>
+            <li><span class="cd">✓</span> Volume pricing negotiation</li>
+            <li><span class="cd">✓</span> On-site installation team</li>
+            <li><span class="cd">✓</span> 0% EMI via Bajaj Finance</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Add-ons -->
+      <div style="margin-top:24px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">Optional Add-ons</div>
+        <div class="addons-row">
+          <label class="addon" data-price="2999"><input type="checkbox" onchange="updAddons()"> 🛡️ Extended Warranty +1yr — <strong>₹2,999</strong></label>
+          <label class="addon" data-price="1500"><input type="checkbox" onchange="updAddons()"> ⚡ Express Delivery — <strong>₹1,500</strong></label>
+          <label class="addon" data-price="4999"><input type="checkbox" onchange="updAddons()"> 🔧 Pro Installation Visit — <strong>₹4,999</strong></label>
+          <label class="addon" data-price="999"><input type="checkbox" onchange="updAddons()"> 🔩 Spare Actuator Clamp — <strong>₹999</strong></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2+3+4: Form + Sidebar -->
+  <div class="form-area">
+    <div class="form-area-in">
+
+      <!-- Forms -->
+      <div class="form-col" id="allForms">
+
+        <!-- Details -->
+        <div class="fc ani">
+          <div class="fc-hdr"><div class="fc-num">2</div><div class="fc-ttl">YOUR DETAILS</div></div>
+          <div class="g2" style="margin-bottom:14px;">
+            <div class="fg"><label>First Name *</label><input id="fname" type="text" placeholder="Raju" required></div>
+            <div class="fg"><label>Last Name *</label><input id="lname" type="text" placeholder="Kumar" required></div>
+          </div>
+          <div class="g2" style="margin-bottom:14px;">
+            <div class="fg"><label>Phone Number *</label><input id="phone" type="tel" placeholder="+91 98765 43210" required></div>
+            <div class="fg"><label>Email Address *</label><input id="email" type="email" placeholder="you@example.com" required></div>
+          </div>
+          <div class="fg" style="margin-bottom:14px;">
+            <label>Car Make, Model & Year *</label>
+            <input id="carmodel" type="text" placeholder="e.g. Maruti Suzuki Dzire 2019 Manual" required>
+            <span class="hint">We verify compatibility before shipping. Fully refundable if incompatible.</span>
+          </div>
+          <div class="fg">
+            <label>Year of Manufacture *</label>
+            <select id="caryr"><option value="">Select year</option><option>2024</option><option>2023</option><option>2022</option><option>2021</option><option>2020</option><option>2019</option><option>2018</option><option>2017</option><option>2016</option><option>2015</option><option>2014</option><option>2013</option><option>2012</option><option>2011</option><option>2010</option><option>Pre-2010</option></select>
+          </div>
+        </div>
+
+        <!-- Delivery -->
+        <div class="fc ani">
+          <div class="fc-hdr"><div class="fc-num">3</div><div class="fc-ttl">DELIVERY ADDRESS</div></div>
+          <div class="fg" style="margin-bottom:14px;"><label>Street Address *</label><input id="street" type="text" placeholder="House/Flat No., Street, Area" required></div>
+          <div style="display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:14px;">
+            <div class="fg"><label>Landmark</label><input id="landmark" type="text" placeholder="Near petrol pump, market..."></div>
+            <div class="fg"><label>PIN Code *</label><input id="pin" type="text" placeholder="560001" maxlength="6" required></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;">
+            <div class="fg"><label>City *</label><input id="city" type="text" placeholder="Bengaluru" required></div>
+            <div class="fg"><label>State *</label>
+              <select id="state"><option value="">Select state</option><option>Kerala</option><option>Karnataka</option><option>Tamil Nadu</option><option>Andhra Pradesh</option><option>Telangana</option><option>Maharashtra</option><option>Delhi</option><option>Gujarat</option><option>Rajasthan</option><option>Punjab</option><option>West Bengal</option><option>Uttar Pradesh</option><option>Madhya Pradesh</option><option>Other</option></select>
+            </div>
+            <div class="fg"><label>Alt. Phone</label><input id="altphone" type="tel" placeholder="+91 (optional)"></div>
+          </div>
+          <div class="fg"><label>Delivery / Installation Notes</label><textarea id="notes" placeholder="Preferred install time, fleet size, gate code..."></textarea></div>
+        </div>
+
+        <!-- Payment -->
+        <div class="fc ani">
+          <div class="fc-hdr"><div class="fc-num">4</div><div class="fc-ttl">PAYMENT METHOD</div></div>
+          <div class="pay-grid">
+            <div class="po sel" onclick="selPay(this,'upi')"><span>📱</span> UPI / BHIM</div>
+            <div class="po" onclick="selPay(this,'card')"><span>💳</span> Credit / Debit Card</div>
+            <div class="po" onclick="selPay(this,'net')"><span>🏦</span> Net Banking</div>
+            <div class="po" onclick="selPay(this,'emi')"><span>📅</span> 0% EMI (Bajaj)</div>
+            <div class="po" onclick="selPay(this,'cod')"><span>💵</span> Cash on Delivery</div>
+            <div class="po" onclick="selPay(this,'wallet')"><span>👛</span> Paytm / PhonePe</div>
+          </div>
+          <div id="payUPI" class="pf show"><div class="fg" style="margin-bottom:0;"><label>UPI ID</label><input type="text" placeholder="yourname@upi"></div></div>
+          <div id="payCard" class="pf"><div class="fg" style="margin-bottom:14px;"><label>Card Number</label><input type="text" placeholder="1234 5678 9012 3456" maxlength="19" oninput="fmtCard(this)"></div><div class="g2"><div class="fg"><label>Expiry</label><input type="text" placeholder="MM / YY" maxlength="7"></div><div class="fg"><label>CVV</label><input type="password" placeholder="•••" maxlength="4"></div></div></div>
+          <div id="payOther" class="pf"><div style="background:var(--dark);border:1px solid var(--grey);border-radius:7px;padding:14px;font-size:14px;color:var(--muted);">You'll be redirected to complete payment after confirming your order.</div></div>
+          <div id="payCOD" class="pf"><div style="background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.2);border-radius:7px;padding:14px;font-size:14px;color:var(--light);">✅ Pay cash at your doorstep. Available in select pincodes.</div></div>
+          <div class="sep"></div>
+          <div class="terms-r">
+            <input type="checkbox" id="terms">
+            <label for="terms">I agree to the <a href="#" onclick="showMod('warranty');return false;">Terms &amp; Conditions</a> and <a href="#" onclick="showMod('returns');return false;">Return Policy</a>. I understand the 30-day refund policy.</label>
+          </div>
+          <button class="btn btn-r btn-lg place-btn" onclick="placeOrder()">🛒 CONFIRM &amp; PLACE ORDER</button>
+          <div class="secure-note">🔒 Payment info encrypted · Never stored on our servers</div>
+        </div>
+
+        <!-- Success -->
+        <div class="success-blk" id="successBlk">
+          <div class="tick">✅</div>
+          <h3>ORDER CONFIRMED!</h3>
+          <p>Thank you! Your AutoClutch Pro kit is confirmed.<br>Our team will call you <strong>within 24 hours</strong> to confirm delivery details.<br><br>📧 hello@autoclutchpro.in &nbsp;·&nbsp; 📱 +91 9400684511</p>
+          <a href="#hero" class="btn btn-o" style="margin-top:24px;">← Back to Top</a>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sum-side">
+        <div class="sum-box">
+          <div class="sum-hdr"><div class="sum-lbl">Order Summary</div><div class="sum-kit" id="sumKit">B2C Retail Kit</div></div>
+          <div class="sum-bd">
+            <div class="sum-row"><span>Kit Price</span><span id="sumKitP">₹25,000</span></div>
+            <div class="sum-row" id="sumARow" style="display:none;"><span>Add-ons</span><span id="sumAP">₹0</span></div>
+            <div class="sum-row"><span>Delivery</span><span style="color:var(--green);">FREE</span></div>
+            <div class="sum-row sm"><span>GST (18%)</span><span id="sumGST">₹4,500</span></div>
+            <div class="sum-div"></div>
+            <div class="sum-tot"><span class="sum-tot-l">Total</span><span class="sum-tot-p" id="sumTot">₹29,500</span></div>
+            <div class="emi-box">💳 Or pay <strong id="sumEMI">₹4,917/mo</strong> for 6 months at 0% EMI</div>
+          </div>
+        </div>
+
+        <div class="box-box">
+          <div class="box-ttl">📦 What's In The Box</div>
+          <div class="box-item"><span>⚙️</span> Floor-mounted linear actuator</div>
+          <div class="box-item"><span>🎛️</span> Smart wireless gear knob</div>
+          <div class="box-item"><span>🧠</span> OBD-II controller unit</div>
+          <div class="box-item"><span>🔌</span> Mounting hardware + flat cable</div>
+          <div class="box-item"><span>📋</span> Illustrated installation guide</div>
+          <div class="box-item"><span>📱</span> App activation code</div>
+        </div>
+
+        <div class="b4g">
+          <div class="b4"><div class="bi">🇮🇳</div><div class="bl">Made in India</div></div>
+          <div class="b4"><div class="bi">🔄</div><div class="bl">30-Day Returns</div></div>
+          <div class="b4"><div class="bi">🛡️</div><div class="bl">1-Yr Warranty</div></div>
+          <div class="b4"><div class="bi">📞</div><div class="bl">24HR Support</div></div>
+        </div>
+
+        <div class="help">Need help? <a href="tel:+919400684511">📱 +91 9400684511</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="sl">Why AutoClutch Pro</div>
+  <h2 class="st">ENGINEERED FOR<br>REAL DRIVERS.</h2>
+  <p class="sd">Every feature solves a real problem — hill starts, clutch wear, smooth releases — all handled automatically.</p>
+  <div class="feat-grid">
+    <div class="feat ani"><div class="feat-i">🔧</div><div class="feat-t">Zero Wire Cutting</div><p class="feat-d">Plugs into OBD-II, clamps the pedal externally. <strong>Factory warranty stays 100% intact.</strong></p></div>
+    <div class="feat ani"><div class="feat-i">⛰️</div><div class="feat-t">Hill Start Assist</div><p class="feat-d">Tilt sensor holds clutch at bite-point on inclines. <strong>Zero rollback. Ever.</strong></p></div>
+    <div class="feat ani"><div class="feat-i">🔄</div><div class="feat-t">Self-Calibrating</div><p class="feat-d">Finds bite point and adapts as your clutch wears. <strong>No re-tuning needed.</strong></p></div>
+    <div class="feat ani"><div class="feat-i">🛡️</div><div class="feat-t">Failsafe Design</div><p class="feat-d">Power loss? Clamp releases. <strong>Full manual control immediately restored.</strong></p></div>
+    <div class="feat ani"><div class="feat-i">💡</div><div class="feat-t">Intelligent Release</div><p class="feat-d">Reads live RPM via OBD-II, feathers clutch perfectly. <strong>No jerks, no stalls.</strong></p></div>
+    <div class="feat ani"><div class="feat-i">📱</div><div class="feat-t">App Integration</div><p class="feat-d">Live diagnostics, calibration controls, health monitoring. <strong>Your car data in-hand.</strong></p></div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section id="compare">
+  <div class="sl">Market Comparison</div>
+  <h2 class="st">THE ONLY REAL<br>RETROFIT OPTION.</h2>
+  <p class="sd">Every alternative either costs lakhs, voids your warranty, or doesn't automate the clutch at all.</p>
+  <div style="overflow-x:auto;">
+    <table class="ctab">
+      <thead><tr><th>Solution</th><th>Works on Existing Cars</th><th>Preserves Warranty</th><th>Price</th><th>Clutch Automation</th></tr></thead>
+      <tbody>
+        <tr class="ours"><td>⚡ AutoClutch Pro</td><td><span class="bg bgg">✓ Yes</span></td><td><span class="bg bgg">✓ Yes</span></td><td><span class="bg bgg">₹25K–36K</span></td><td><span class="bg bgg">Full Auto</span></td></tr>
+        <tr><td>Hyundai iMT</td><td><span class="bg bgb">✗ New cars only</span></td><td><span class="bg bgg">✓ Yes</span></td><td><span class="bg bgb">₹8–12 Lakh (car)</span></td><td><span class="bg bgg">Full Auto</span></td></tr>
+        <tr><td>Transmission Swap</td><td><span class="bg bgy">⚠ Complex</span></td><td><span class="bg bgb">✗ Voids warranty</span></td><td><span class="bg bgb">₹80K–1.5L</span></td><td><span class="bg bgg">Full Auto</span></td></tr>
+        <tr><td>Buy Automatic Car</td><td><span class="bg bgb">✗ New purchase only</span></td><td><span class="bg bgg">✓ Yes</span></td><td><span class="bg bgb">₹6–25 Lakh</span></td><td><span class="bg bgg">Full Auto</span></td></tr>
+        <tr><td>Gear Foot Rest</td><td><span class="bg bgg">✓ Yes</span></td><td><span class="bg bgg">✓ Yes</span></td><td><span class="bg bgg">₹500–2K</span></td><td><span class="bg bgb">✗ None</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="margin-top:36px;text-align:center;"><a href="#order" class="btn btn-r btn-lg">🛒 Order AutoClutch Pro Now</a></div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="sl">Common Questions</div>
+  <h2 class="st">GOT QUESTIONS?<br>WE HAVE ANSWERS.</h2>
+  <div class="faq-wrap">
+    <div class="fi"><div class="fq" onclick="tFaq(this)">Will this void my car's factory warranty? <span class="ic">+</span></div><div class="fa"><div class="fa-in">No. AutoClutch Pro is 100% non-invasive. It only connects to the OBD-II port and clamps the existing pedal arm externally. No wires cut, no engine modifications. Factory warranty stays fully intact.</div></div></div>
+    <div class="fi"><div class="fq" onclick="tFaq(this)">Which cars are compatible? <span class="ic">+</span></div><div class="fa"><div class="fa-in">Most manual cars made after 2010 with an OBD-II port — Maruti Dzire, Swift, Alto, Toyota Etios, Hyundai i20, Honda City, Tata Nexon manual, and hundreds more. Enter your car model at checkout and we verify compatibility before dispatch. Full refund if incompatible.</div></div></div>
+    <div class="fi"><div class="fq" onclick="tFaq(this)">How long does installation take? <span class="ic">+</span></div><div class="fa"><div class="fa-in">2–3 hours. The kit includes an illustrated guide and step-by-step video. The Premium Kit (₹35,999) includes professional doorstep installation. We also have authorised service centres in Tier-1 cities.</div></div></div>
+    <div class="fi"><div class="fq" onclick="tFaq(this)">What if the system loses power while driving? <span class="ic">+</span></div><div class="fa"><div class="fa-in">Failsafe design: the actuator clamp releases instantly on power loss and you immediately regain full manual clutch control. The system is engineered to fail safe, not fail active. Always.</div></div></div>
+    <div class="fi"><div class="fq" onclick="tFaq(this)">Does Hill Start Assist really work? <span class="ic">+</span></div><div class="fa"><div class="fa-in">Yes. A built-in gyroscope/tilt sensor detects inclines and holds the clutch at the exact bite point until you press the accelerator. Zero rollback — perfect for Bengaluru flyovers, hilly terrain, and stop-and-go slopes.</div></div></div>
+    <div class="fi"><div class="fq" onclick="tFaq(this)">Can I remove it? Is it reversible? <span class="ic">+</span></div><div class="fa"><div class="fa-in">Completely reversible in under 30 minutes. The clamp is mechanical (no adhesives), OBD-II plug pulls out, smart knob unscrews. Car returns to 100% stock. This is also how we preserve your warranty.</div></div></div>
+    <div class="fi"><div class="fq" onclick="tFaq(this)">What payment options are available? <span class="ic">+</span></div><div class="fa"><div class="fa-in">UPI, net banking, credit/debit cards, Paytm/PhonePe, Cash on Delivery (select pincodes), and 0% EMI for 6 months via Bajaj Finance. Fleet operators can negotiate custom payment terms directly.</div></div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fg2">
+    <div class="fb">
+      <a href="#hero" class="logo"><div class="logo-box">AC</div><span class="logo-text" style="margin-left:10px;">Auto<em>Clutch</em> Pro</span></a>
+      <p>The first aftermarket iMT retrofit kit for India's manual transmission drivers. Every cab driver deserves to drive without pain.</p>
+      <div style="margin-top:18px;display:flex;gap:10px;">
+        <a href="mailto:hello@autoclutchpro.in" class="btn btn-o" style="font-size:11px;padding:8px 14px;">📧 Email</a>
+        <a href="tel:+919400684511" class="btn btn-o" style="font-size:11px;padding:8px 14px;">📱 Call</a>
+      </div>
+    </div>
+    <div class="fc2"><h4>Product</h4><ul><li><a href="#order">Order Now</a></li><li><a href="#features">Features</a></li><li><a href="#compare">Comparison</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+    <div class="fc2"><h4>Company</h4><ul><li><a href="#" onclick="showMod('about');return false;">About Us</a></li><li><a href="#" onclick="showMod('team');return false;">Team</a></li><li><a href="#" onclick="showMod('investors');return false;">Investors</a></li><li><a href="#" onclick="showMod('careers');return false;">Careers</a></li></ul></div>
+    <div class="fc2"><h4>Support</h4><ul><li><a href="#" onclick="showMod('installation');return false;">Install Guide</a></li><li><a href="#" onclick="showMod('warranty');return false;">Warranty</a></li><li><a href="#" onclick="showMod('returns');return false;">Return Policy</a></li><li><a href="mailto:hello@autoclutchpro.in">Contact</a></li></ul></div>
+  </div>
+  <div class="fb2">
+    <span>© 2025–26 AutoClutch Pro. All rights reserved. Patent Pending.</span>
+    <span>hello@autoclutchpro.in &nbsp;·&nbsp; +91 9400684511 &nbsp;·&nbsp; AutoClutchPro.com</span>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="mov" id="modOv" onclick="if(event.target===this)this.classList.remove('on')">
+  <div class="modal">
+    <button class="mx" onclick="document.getElementById('modOv').classList.remove('on')">✕</button>
+    <div class="mt2" id="mTtl"></div>
+    <div class="ms" id="mSub"></div>
+    <div id="mBod"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span>✅</span><span id="toastMsg"></span></div>
+
+<!-- FLOATING CTA -->
+<div class="fcta" id="fcta"><div class="fcta-in"><span class="fct">Drive pain-free from today</span><a href="#order" class="btn btn-r" onclick="document.getElementById('fcta').classList.remove('on')">Order Now</a></div></div>
+
+<script>
+// Fade in
+const anis = document.querySelectorAll('.ani');
+const aio = new IntersectionObserver(es=>es.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*80);aio.unobserve(e.target);}}),{threshold:.08});
+anis.forEach(el=>aio.observe(el));
+
+// Kit select
+let kitPrice=25000, addAmt=0;
+function selKit(el){
+  document.querySelectorAll('.kc').forEach(k=>k.classList.remove('sel'));
+  el.classList.add('sel');
+  kitPrice=parseInt(el.dataset.price);
+  document.getElementById('sumKit').textContent=el.dataset.name;
+  updSum();
+}
+
+// Addons
+function updAddons(){
+  addAmt=0;
+  document.querySelectorAll('.addon input:checked').forEach(cb=>{addAmt+=parseInt(cb.closest('.addon').dataset.price);});
+  updSum();
+}
+
+// Summary
+function updSum(){
+  const sub=kitPrice+addAmt, gst=Math.round(sub*.18), tot=sub+gst;
+  document.getElementById('sumKitP').textContent='₹'+kitPrice.toLocaleString('en-IN');
+  const ar=document.getElementById('sumARow');
+  if(addAmt>0){ar.style.display='flex';document.getElementById('sumAP').textContent='₹'+addAmt.toLocaleString('en-IN');}
+  else ar.style.display='none';
+  document.getElementById('sumGST').textContent='₹'+gst.toLocaleString('en-IN');
+  document.getElementById('sumTot').textContent='₹'+tot.toLocaleString('en-IN');
+  document.getElementById('sumEMI').textContent='₹'+Math.ceil(tot/6).toLocaleString('en-IN')+'/mo';
+}
+
+// Payment
+function selPay(el,type){
+  document.querySelectorAll('.po').forEach(p=>p.classList.remove('sel'));
+  el.classList.add('sel');
+  document.querySelectorAll('.pf').forEach(f=>{f.classList.remove('show');f.style.display='none';});
+  const m={upi:'payUPI',card:'payCard',cod:'payCOD'};
+  const f=document.getElementById(m[type]||'payOther');
+  f.style.display='block';setTimeout(()=>f.classList.add('show'),10);
+}
+function fmtCard(inp){let v=inp.value.replace(/\D/g,'').substring(0,16);inp.value=v.replace(/(.{4})/g,'$1 ').trim();}
+
+// Place order
+function placeOrder(){
+  const g=id=>document.getElementById(id).value.trim();
+  if(!g('fname')||!g('lname')||!g('phone')||!g('email')||!g('carmodel')||!g('street')||!g('city')||!g('pin')){showToast('⚠️ Please fill all required fields');return;}
+  if(!g('email').includes('@')){showToast('⚠️ Enter a valid email address');return;}
+  if(g('pin').length<6){showToast('⚠️ Enter a valid 6-digit PIN code');return;}
+  if(!document.getElementById('terms').checked){showToast('⚠️ Please accept the terms & conditions');return;}
+  document.getElementById('allForms').style.display='none';
+  document.getElementById('successBlk').style.display='block';
+  showToast('🎉 Order placed! Our team will call within 24 hours.');
+}
+
+// Toast
+function showToast(msg){const t=document.getElementById('toast');document.getElementById('toastMsg').textContent=msg;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),3500);}
+
+// FAQ
+function tFaq(q){q.parentElement.classList.toggle('open');}
+
+// Modal
+function showMod(type){
+  const d={
+    about:{t:'ABOUT US',s:'Our Story',b:'AutoClutch Pro was founded in 2025 by engineers from Kerala. Our mission: <em>"Every cab driver deserves to drive without pain."</em> We built the first non-invasive aftermarket iMT retrofit kit that any driver can afford — starting from ₹25,000.'},
+    team:{t:'OUR TEAM',s:'The engineers behind AutoClutch Pro',b:'<strong>Tarun R Menon</strong> — CEO & Product Head<br><em>Product strategy, business development, investor relations</em><br><br><strong>Juanto Xavier</strong> — CTO & Hardware Lead<br><em>Embedded systems, actuator design, OBD-II integration</em><br><br><strong>Sujit Saju</strong> — Sales & BD Head<br><em>Fleet B2B, dealer network, digital marketing</em><br><br><strong>Mishal Gijo</strong> — Software & App Dev<br><em>Firmware, React Native app, OBD-II library</em>'},
+    investors:{t:'INVEST IN US',s:'Seed Round Open — ₹50 Lakhs',b:'Raising ₹50L at 15% equity (₹1.33Cr valuation).<br><br>📊 ₹8,500Cr TAM · 58% gross margin · 180M addressable cars in India<br><br>₹15L Product Dev | ₹20L Inventory | ₹12L Marketing | ₹3L Legal<br><br>Eligible: MSME Startup India Seed Fund, AIM Grant, SIDBI Loan.<br><br>📧 hello@autoclutchpro.in'},
+    careers:{t:'JOIN US',s:"We're hiring early-stage talent",b:'Open roles:<br>• Embedded Systems Engineer<br>• Sales & BD Executive (Fleet)<br>• Operations & QC Lead<br>• Customer Success Manager<br><br>📧 hello@autoclutchpro.in — Subject: "Career — [Role]"'},
+    installation:{t:'INSTALLATION',s:'2–3 Hours · DIY-Friendly',b:'1. Mount actuator clamp on clutch pedal arm (no drilling)<br>2. Connect OBD-II reader to dashboard port<br>3. Thread flat cable to controller under seat<br>4. Swap in Smart Gear Knob<br>5. Pair via Bluetooth and run auto-calibration<br>6. Test drive and verify smooth operation<br><br>📱 Book pro installer: +91 9400684511'},
+    warranty:{t:'WARRANTY POLICY',s:'1-Year Hardware Warranty',b:'Covers: actuator motor, OBD-II controller, smart knob, all connectors and cables.<br><br>Not covered: physical damage, improper installation, water damage.<br><br>Premium Kit includes 2-year extended warranty.<br><br>📧 hello@autoclutchpro.in'},
+    returns:{t:'RETURN POLICY',s:'30-Day No-Questions Returns',b:'✓ 30-day return window from delivery date<br>✓ Full refund if installed and unsatisfied<br>✓ Free return pickup arranged by our team<br>✓ Refund processed in 5–7 business days<br><br>📧 hello@autoclutchpro.in | 📱 +91 9400684511'}
+  };
+  const m=d[type];if(!m)return;
+  document.getElementById('mTtl').textContent=m.t;
+  document.getElementById('mSub').textContent=m.s;
+  document.getElementById('mBod').innerHTML='<p style="font-size:15px;line-height:1.8;color:var(--light);font-weight:300;">'+m.b+'</p>';
+  document.getElementById('modOv').classList.add('on');
+}
+
+// Floating CTA
+window.addEventListener('scroll',()=>{
+  const el=document.getElementById('fcta');
+  const ord=document.getElementById('order').getBoundingClientRect();
+  if(window.scrollY>600&&ord.bottom<0)el.classList.add('on');
+  else el.classList.remove('on');
+});
+
+// Mobile menu
+function toggleMenu(){
+  const nl=document.querySelector('.nav-links');
+  if(nl.style.display==='flex'){nl.style.display='';return;}
+  nl.style.cssText='display:flex;flex-direction:column;position:fixed;top:68px;left:0;right:0;background:#0f0f0f;padding:20px;gap:18px;border-bottom:1px solid #2E2E2E;z-index:999;';
+  nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nl.style.display='',{once:true}));
+}
+</script>
+</body>
+</html>
